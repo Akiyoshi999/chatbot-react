@@ -2,6 +2,7 @@ import React from "react"
 import logo from "./logo.svg";
 import defaultDataset from "./dataset";
 import "./assets/styles/style.css";
+import {AnswersList} from "./components/index"
 
 export default class App extends React.Component {
   constructor(props) {
@@ -14,11 +15,27 @@ export default class App extends React.Component {
       open: false,
     };
   }
+  
+  initAnswer = () => {
+    const initDataset = this.state.dataset[this.state.currentId];
+    const initAnswers = initDataset.answers;
+
+    this.setState({
+      answers: initAnswers
+    })
+  }
+
+  componentDidMount(){
+    this.initAnswer()
+  }
 
   render() {
-    return <section className="c-section">
-      <div className="c-box">
-      </div>
-    </section>;
+    return (
+      <section className="c-section">
+        <div className="c-box">
+          <AnswersList answers={this.state.answers}/>
+        </div>
+      </section>
+    );
   }
 }
